@@ -25,5 +25,9 @@ __plugin_meta__ = PluginMetadata(
 )
 
 
-async def get_nickname(session_or_event: Union[Session, Event], bot: Bot, raise_on_failed: bool = False):
-    return await func(bot.type).get_nickname(session_or_event, bot, raise_on_failed)
+async def get_nickname(session_or_event: Union[Session, Event], bot: Bot, *, raise_on_failed: bool = False) -> str:
+    return await func(bot.type).get_nickname(session_or_event, bot, raise_on_failed=raise_on_failed)
+
+
+async def get_bot_nickname(bot: Bot) -> str:
+    return await func(bot.type).get_bot_nickname(bot)
