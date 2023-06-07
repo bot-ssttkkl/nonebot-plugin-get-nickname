@@ -4,7 +4,7 @@ version = "0.1.1.post1"
 description = ""
 authors = ["ssttkkl <huang.wen.long@hotmail.com>"]
 readme = "README.md"
-packages = [{include = "nonebot_plugin_get_nickname"}]
+packages = [{ include = "nonebot_plugin_get_nickname" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -12,9 +12,25 @@ nonebot2 = "^2.0.0"
 nonebot-plugin-session = ">=0.0.3"
 
 [tool.poetry.group.dev.dependencies]
-nonebot2 = { extras = ["httpx"], version = "^2.0.0" }
+nonebot2 = { extras = ["httpx", "websocket", "fastapi"], version = "^2.0.0" }
 nonebot-adapter-qqguild = "^0.2.2"
 nonebot-adapter-onebot = "^2.2.2"
+nonebot-adapter-kaiheila = "^0.2.6"
+nonebot-adapter-telegram = "^0.1.0b13"
+nonebot-adapter-console = "^0.3.2"
+nb-cli = "^1.1.2"
+
+[tool.nonebot]
+adapters = [
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+    { name = "Telegram", module_name = "nonebot.adapters.telegram" },
+    { name = "QQ 频道", module_name = "nonebot.adapters.qqguild" },
+    { name = "开黑啦", module_name = "nonebot.adapters.kaiheila" },
+    { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
+    { name = "Console", module_name = "nonebot.adapters.console" }
+]
+plugins = ["nonebot_plugin_test_get_nickname"]
+builtin_plugins = []
 
 [build-system]
 requires = ["poetry-core"]

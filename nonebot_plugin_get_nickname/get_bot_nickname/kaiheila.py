@@ -1,12 +1,12 @@
 from nonebot import logger
-from nonebot.adapters.qqguild import Bot
-from nonebot.adapters.qqguild.api import User
+from nonebot.adapters.kaiheila import Bot
+from nonebot.adapters.kaiheila.api import User
 from nonebot.exception import ActionFailed
 
 
 async def get_bot_nickname(bot: Bot, *, raise_on_failed: bool = False) -> str:
     try:
-        user: User = await bot.me()
+        user: User = await bot.user_me()
         return user.username
     except ActionFailed as e:
         if raise_on_failed:

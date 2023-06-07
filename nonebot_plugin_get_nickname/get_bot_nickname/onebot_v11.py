@@ -3,7 +3,7 @@ from nonebot.adapters.onebot.v11 import Bot
 from nonebot.exception import ActionFailed
 
 
-async def get_bot_nickname(bot: Bot, raise_on_failed: bool = False) -> str:
+async def get_bot_nickname(bot: Bot, *, raise_on_failed: bool = False) -> str:
     try:
         login_info = await bot.get_login_info()
         return login_info["nickname"]

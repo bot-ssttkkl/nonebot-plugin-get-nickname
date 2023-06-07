@@ -1,7 +1,6 @@
 from typing import Union
 
-from nonebot.adapters.qqguild import Bot, Event
-from nonebot.adapters.qqguild.api import User
+from nonebot.adapters.kaiheila import Bot, Event
 from nonebot_plugin_session import Session, extract_session
 
 from ..get_nickname_by_id.kaiheila import get_nickname_by_id
@@ -9,9 +8,9 @@ from ..get_nickname_by_id.kaiheila import get_nickname_by_id
 
 async def get_nickname(session_or_event: Union[Session, Event], bot: Bot, *, raise_on_failed: bool = False) -> str:
     if isinstance(session_or_event, Event):
-        author: User = getattr(session_or_event, "author", None)
-        if author is not None and author.username is not None:
-            return author.username
+        author = session_or_event.extra.author
+        if author is not None and author.nickname is not None:
+            return author.nickname
 
         session = extract_session(bot, session_or_event)
     else:

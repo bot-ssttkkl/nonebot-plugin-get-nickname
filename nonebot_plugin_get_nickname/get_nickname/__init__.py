@@ -15,3 +15,17 @@ def register(factory: FuncManagerFactory):
         factory.register(Adapter.get_name(), "get_nickname", get_nickname)
     except ImportError:
         pass
+
+    try:
+        from nonebot.adapters.kaiheila import Adapter
+        from .kaiheila import get_nickname
+        factory.register(Adapter.get_name(), "get_nickname", get_nickname)
+    except ImportError:
+        pass
+
+    try:
+        from nonebot.adapters.console import Adapter
+        from .console import get_nickname
+        factory.register(Adapter.get_name(), "get_nickname", get_nickname)
+    except ImportError:
+        pass

@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import Callable, Mapping
 
 from .errors import UnsupportedBotError
@@ -8,12 +9,10 @@ class FuncManager:
         self._func = func
 
     def __getattr__(self, item):
-        try:
-            func = self._func[item]
-        except KeyError:
+        if item in self._func:
+            return self._func[item]
+        else:
             raise UnsupportedBotError()
-
-        return func
 
 
 class FuncManagerFactory:
@@ -23,6 +22,7 @@ class FuncManagerFactory:
     def register(self, bot_type: str, func_name: str, func: Callable):
         self._registry.append((bot_type, func_name, func))
 
+    @lru_cache(maxsize=8)
     def __call__(self, bot_type: str):
         func_mapping = {}
         for type_, name, func in self._registry:
